@@ -37,13 +37,7 @@ public class PlansService {
                 .selectTaskHistory()
                 .setWhere(t -> t.aggregateRoot().nameEq(planId).and(t.sysHistoryTimeBetween(startOffset, endOffset)))
                 .withSysState()
-                .withSysHistoryOwner((tsk) -> {
-                    try {
-                        searchClient.getTask(GraphCreator.selectTask().withName());
-                    } catch (SdkJsonRpcClientException e) {
-                        e.printStackTrace();
-                    }
-                })
+                .withSysHistoryOwner()
                 .withName()
                 .withSysNameUpdated()
                 .withStartDate()
